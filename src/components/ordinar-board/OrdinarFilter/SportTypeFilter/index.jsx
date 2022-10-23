@@ -32,18 +32,32 @@ export const SportTypeFilter = ({ getTasks }) => {
 
   const changeStartDate = (value) => {
     const time = moment(value).format("YYYY-MM-DD");
-    getTasks({
-      queryRoute: "complete_gte",
-      queryValue: time,
-    });
+    if (!value) {
+      getTasks({
+        queryRoute: "complete_gte",
+        queryValue: "",
+      });
+    } else {
+      getTasks({
+        queryRoute: "complete_gte",
+        queryValue: time,
+      });
+    }
   };
 
   const changeStartDateTill = (value) => {
     const time = moment(value).format("YYYY-MM-DD");
-    getTasks({
-      queryRoute: "complete_lte",
-      queryValue: time,
-    });
+    if (!value) {
+      getTasks({
+        queryRoute: "complete_lte",
+        queryValue: "",
+      });
+    } else {
+      getTasks({
+        queryRoute: "complete_lte",
+        queryValue: time,
+      });
+    }
   };
 
   return (
@@ -51,7 +65,7 @@ export const SportTypeFilter = ({ getTasks }) => {
       <Form {...layout} form={form} name="control-hooks">
         <Form.Item>
           <Input.Group compact>
-            <Form.Item name={"sport"} noStyle>
+            <Form.Item noStyle>
               <Select
                 showSearch
                 placeholder="Select Sport"
@@ -68,7 +82,7 @@ export const SportTypeFilter = ({ getTasks }) => {
                 <Option value="hockey">Hockey</Option>
               </Select>
             </Form.Item>
-            <Form.Item name={"startDate"} noStyle>
+            <Form.Item noStyle>
               <span className="label_start_from">Start From:</span>
               <DatePicker
                 format="DD MM YYYY"
@@ -77,7 +91,7 @@ export const SportTypeFilter = ({ getTasks }) => {
                 onChange={changeStartDate}
               />
             </Form.Item>
-            <Form.Item name={"endDate"} noStyle>
+            <Form.Item noStyle>
               <span className="label_start_from">Start until:</span>
               <DatePicker
                 format="DD MM YYYY"

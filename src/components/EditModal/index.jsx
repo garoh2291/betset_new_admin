@@ -2,26 +2,8 @@ import { message, Modal } from "antd";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editGameThunk } from "../../redux/gameSlice";
-import {
-  Button,
-  Col,
-  Form,
-  FormFeedback,
-  FormGroup,
-  Input,
-  Label,
-  Row,
-} from "reactstrap";
+import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import { checkProbability } from "../../helpers";
-
-function onDefaultSelected(value, secondValue) {
-  switch (value) {
-    case secondValue:
-      return true;
-    default:
-      return false;
-  }
-}
 
 export const EditModal = ({ onClose, editGame }) => {
   const dispatch = useDispatch();
@@ -352,6 +334,7 @@ export const EditModal = ({ onClose, editGame }) => {
                 name="probability"
                 placeholder="probability"
                 type="text"
+                onChange={handleChange}
               />
             </FormGroup>
           </Col>

@@ -5,4 +5,5 @@
   align-items: center;
   justify-content: flex-start;
   height: auto;
+  padding-left: 0 !important;
 }

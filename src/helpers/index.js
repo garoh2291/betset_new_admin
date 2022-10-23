@@ -11,6 +11,10 @@ import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import WbCloudyIcon from "@mui/icons-material/WbCloudy";
 
+const today = new Date();
+const today1 = new Date(`${today} UTC`);
+const finalDate = today1.toISOString();
+
 export function sportType(sport) {
   switch (sport) {
     case "volleyball":
@@ -45,7 +49,11 @@ export const generateQuery = (_searchSortQuery) => {
       return (query += `${item.queryRoute}=${item.queryValue}&`);
     }
   });
-  return query;
+  if (query === "") {
+    return `complete_gte=${finalDate}`;
+  } else {
+    return query;
+  }
 };
 
 export function weatherType(weather) {

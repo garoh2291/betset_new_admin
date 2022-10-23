@@ -1,0 +1,10 @@
+.pro_game_for_wrapper {
+  width: 100%;
+  min-height: 200px;
+  border: 1px solid;
+}
+
+.add_pro_game {
+  width: 100%;
+  min-height: 150px;
+}

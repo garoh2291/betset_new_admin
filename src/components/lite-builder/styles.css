@@ -1,0 +1,20 @@
+.lite_builder_wrapper {
+  width: 100%;
+  min-height: 200px;
+  border: 1px solid;
+  padding: 10px;
+}
+
+.new_game_wrapper {
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.new_game_form_wrapper {
+  width: 100%;
+  min-height: 150px;
+}

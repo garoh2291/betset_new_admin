@@ -1,0 +1,10 @@
+.pro_builder_wrapper {
+  width: 100%;
+  min-height: 800px;
+  padding: 20px;
+}
+
+.events_wrapper {
+  width: 100%;
+  padding: 10px;
+}

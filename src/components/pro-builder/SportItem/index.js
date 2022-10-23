@@ -55,7 +55,6 @@ export const SportItem = memo(({ match, count }) => {
   }, [match.Id]);
 
   const onSubEvent = (additional) => {
-    console.log(additional);
     const {
       positionAm,
       positionEn,
@@ -99,7 +98,6 @@ export const SportItem = memo(({ match, count }) => {
       date: finalDate,
     };
 
-    console.log(newGame);
     if (newGame.risk === "wrong") {
       message.error("You can't add this game");
     } else {

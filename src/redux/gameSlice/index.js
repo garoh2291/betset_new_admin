@@ -34,7 +34,7 @@ export const SetGameThunk = createAsyncThunk(
       })
       .then((data) => {
         cbSuccess();
-        // dispatch(addGame({ data }));
+        dispatch(addGame({ data }));
       })
       .catch((err) => cbError);
   }

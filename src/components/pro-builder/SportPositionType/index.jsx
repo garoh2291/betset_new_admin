@@ -35,8 +35,6 @@ export const SportPositionType = ({
     }
   });
 
-  //   console.log(armPositionArray);
-  //   console.log(finalPositionsAm);
   const globalPosition = event.PN ? event.PN : "";
   const globalPositionEn = eventsEn[index].PN ? eventsEn[index].PN : "";
   const globalPositionRu = eventsRu[index].PN ? eventsRu[index].PN : "";

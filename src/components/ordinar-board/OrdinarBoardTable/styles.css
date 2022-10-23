@@ -1,0 +1,6 @@
+.game_table_wrapper {
+  width: 100%;
+  min-height: 300px;
+  border: 1px solid;
+  padding: 5px;
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { ProBuilderForm } from "./ProBuilderForm";
 import { SportItem } from "./SportItem";
 import "./styles.css";
@@ -9,6 +10,8 @@ export const ProBuilder = () => {
   const [country, setcountry] = useState([]);
   const [leagues, setLeagues] = useState([]);
   const [matchs, setMatchs] = useState(null);
+  const location = useLocation();
+  const type = location.pathname === "/" ? "ordinar" : "express";
 
   useEffect(() => {
     fetch(
@@ -76,7 +79,7 @@ export const ProBuilder = () => {
       <div className="events_wrapper">
         {matchs &&
           matchs.map((match) => {
-            return <SportItem key={match.Id} match={match} />;
+            return <SportItem key={match.Id} match={match} type={type} />;
           })}
       </div>
     </div>

@@ -7,6 +7,7 @@ export const SportItemBody = ({
   matchDetailsEn,
   matchDetailsRu,
   onSubEvent,
+  type,
 }) => {
   const array = matchDetailsAm.filter((item, index, array) => {
     if (
@@ -50,6 +51,7 @@ export const SportItemBody = ({
               eventsRu={arrayRu}
               onSubEvent={onSubEvent}
               index={index}
+              type={type}
             />
           </div>
         );

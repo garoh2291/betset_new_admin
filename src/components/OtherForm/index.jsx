@@ -12,7 +12,7 @@ export const OtherFrom = ({ changeSport }) => {
         <Form.Item name={"date"} noStyle rules={[{ required: true }]}>
           <DatePicker
             format="DD MM YYYY"
-            style={{ width: "15%" }}
+            style={{ width: "20%" }}
             inputReadOnly={true}
           />
         </Form.Item>
@@ -20,7 +20,7 @@ export const OtherFrom = ({ changeSport }) => {
         <Form.Item name={"time"} noStyle rules={[{ required: true }]}>
           <TimePicker
             format={format}
-            style={{ width: "15%" }}
+            style={{ width: "20%" }}
             inputReadOnly={true}
           />
         </Form.Item>
@@ -50,17 +50,9 @@ export const OtherFrom = ({ changeSport }) => {
             },
           ]}
         >
-          <Input placeholder="CF" style={{ width: "10%" }} />
+          <Input placeholder="CF" style={{ width: "15%" }} />
         </Form.Item>
-        <Form.Item name={"risk"} noStyle rules={[{ required: true }]}>
-          <Select placeholder="Select Risk" style={{ width: "15%" }}>
-            <Option value="best">Best Options</Option>
-            <Option value="low">Low</Option>
-            <Option value="medium">Medium</Option>
-            <Option value="high">High</Option>
-            <Option value="extreme">Extreme</Option>
-          </Select>
-        </Form.Item>
+
         <Form.Item
           name={"probPrc"}
           noStyle

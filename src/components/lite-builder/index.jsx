@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form, message, Select } from "antd";
 import * as moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+
 import { SetGameThunk } from "../../redux/gameSlice";
 import { OtherFrom } from "../OtherForm";
 import { ArmForm } from "../ArmForm";
@@ -9,11 +11,12 @@ import { EngForm } from "../EngForm";
 import "./styles.css";
 import { DescriptionForm } from "../Description";
 import { RuForm } from "../RuForm";
-import { checkProbability } from "../../helpers";
+import { checkProbability, uid } from "../../helpers";
+import { GameContext } from "../../context";
 
 const tailLayout = {
   wrapperCol: {
-    offset: 1,
+    offset: 0,
     span: 24,
   },
 };
@@ -28,6 +31,9 @@ const layout = {
 };
 
 export const LiteBuilder = () => {
+  const location = useLocation();
+  const type = location.pathname === "/" ? "ordinar" : "express";
+  const { setBetGames } = useContext(GameContext);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const [sport, setSport] = useState(null);
@@ -73,6 +79,7 @@ export const LiteBuilder = () => {
     const finalDate = newDate2.toISOString();
 
     const newGame = {
+      id: type === "ordinar" ? undefined : uid(),
       team1: {
         am: team1Am,
         en: team1En,
@@ -107,7 +114,12 @@ export const LiteBuilder = () => {
     if (newGame.risk === "wrong") {
       message.error("You can't add this game");
     } else {
-      dispatch(SetGameThunk({ newGame, cbSuccess, cbError }));
+      type === "ordinar"
+        ? dispatch(SetGameThunk({ newGame, cbSuccess, cbError }))
+        : setBetGames((prev) => {
+            cbSuccess();
+            return [...prev, newGame];
+          });
     }
     form.resetFields();
   };
@@ -127,7 +139,7 @@ export const LiteBuilder = () => {
             <ArmForm sport={sport} />
             <EngForm sport={sport} />
             <RuForm sport={sport} />
-            <DescriptionForm />
+            {type === "ordinar" ? <DescriptionForm /> : ""}
             <Form.Item {...tailLayout}>
               <Button type="danger" htmlType="submit">
                 Add Game

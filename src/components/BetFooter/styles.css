@@ -1,0 +1,29 @@
+.bet_footer {
+  width: 100%;
+  height: 100px;
+}
+
+.total_Cf {
+  height: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.total_Cf {
+  font-size: 18px;
+}
+
+.total_head {
+  width: 40%;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.footer_info {
+  width: 50%;
+  text-align: right;
+}

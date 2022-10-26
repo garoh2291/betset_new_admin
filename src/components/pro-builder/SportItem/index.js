@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useState } from "react";
+import React, { useEffect, memo, useState, useContext } from "react";
 import "./styles.css";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -11,9 +11,13 @@ import * as moment from "moment";
 import { SetGameThunk } from "../../../redux/gameSlice";
 import { SportItemBody } from "../SportItemBody";
 import { message, Skeleton } from "antd";
-import { checkProbability, uid } from "../../../helpers";
 
-export const SportItem = memo(({ match, count }) => {
+import { checkProbability, uid } from "../../../helpers";
+import { GameContext } from "../../../context";
+
+export const SportItem = memo(({ match, type }) => {
+  const { setBetGames } = useContext(GameContext);
+
   const [matchDetailsAm, setMatchDetailsAm] = useState();
   const [matchDetailsEn, setMatchDetailsEn] = useState();
   const [matchDetailsRu, setMatchDetailsRu] = useState();
@@ -67,6 +71,7 @@ export const SportItem = memo(({ match, count }) => {
     } = additional;
 
     const newGame = {
+      id: type === "ordinar" ? undefined : uid(),
       team1: {
         am: matchDetailsAm[0].HT,
         en: matchDetailsEn[0].HT,
@@ -101,7 +106,12 @@ export const SportItem = memo(({ match, count }) => {
     if (newGame.risk === "wrong") {
       message.error("You can't add this game");
     } else {
-      dispatch(SetGameThunk({ newGame, cbSuccess, cbError }));
+      type === "ordinar"
+        ? dispatch(SetGameThunk({ newGame, cbSuccess, cbError }))
+        : setBetGames((prev) => {
+            cbSuccess();
+            return [...prev, newGame];
+          });
     }
   };
 
@@ -133,6 +143,7 @@ export const SportItem = memo(({ match, count }) => {
               matchDetailsRu={matchDetailsRu}
               onSubEvent={onSubEvent}
               key={uid()}
+              type={type}
             />
           )}
         </Typography>

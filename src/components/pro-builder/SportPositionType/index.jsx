@@ -12,6 +12,7 @@ export const SportPositionType = ({
   eventsRu,
   onSubEvent,
   index,
+  type,
 }) => {
   const armPositionArray = event.StakeTypes;
   const enPositionsArray = eventsEn[index].StakeTypes;
@@ -68,6 +69,7 @@ export const SportPositionType = ({
               globalPositionEn={globalPositionEn}
               globalPositionRu={globalPositionRu}
               onSubEvent={onSubEvent}
+              type={type}
             />
           ))}
         </Typography>

@@ -19,6 +19,7 @@ export const ProDescritptionAndProbability = ({
   positionDetails,
   onSubEvent,
   changeChecked,
+  type,
 }) => {
   const [form] = Form.useForm();
   const onFinish = (values) => {
@@ -40,44 +41,56 @@ export const ProDescritptionAndProbability = ({
   return (
     <div style={{ marginTop: "10px" }}>
       <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
-        <Form.Item>
-          <Input.Group compact>
-            <Form.Item
-              name={"descriptionAm"}
-              noStyle
-              rules={[{ required: true }]}
-            >
-              <Input
-                placeholder="Description Armenian"
-                style={{ width: "100%" }}
-              />
-            </Form.Item>
-          </Input.Group>
-        </Form.Item>
-        <Form.Item>
-          <Input.Group compact>
-            <Form.Item
-              name={"descriptionEn"}
-              noStyle
-              rules={[{ required: true }]}
-            >
-              <Input
-                placeholder="Description English"
-                style={{ width: "100%" }}
-              />
-            </Form.Item>
-          </Input.Group>
-        </Form.Item>
-        <Form.Item>
-          <Input.Group compact>
-            <Form.Item name={"descriptionRu"} noStyle>
-              <Input
-                placeholder="Description Russian Optional"
-                style={{ width: "100%" }}
-              />
-            </Form.Item>
-          </Input.Group>
-        </Form.Item>
+        {type === "ordinar" ? (
+          <Form.Item>
+            <Input.Group compact>
+              <Form.Item
+                name={"descriptionAm"}
+                noStyle
+                rules={[{ required: true }]}
+              >
+                <Input
+                  placeholder="Description Armenian"
+                  style={{ width: "100%" }}
+                />
+              </Form.Item>
+            </Input.Group>
+          </Form.Item>
+        ) : (
+          ""
+        )}
+        {type === "ordinar" ? (
+          <Form.Item>
+            <Input.Group compact>
+              <Form.Item
+                name={"descriptionEn"}
+                noStyle
+                rules={[{ required: true }]}
+              >
+                <Input
+                  placeholder="Description English"
+                  style={{ width: "100%" }}
+                />
+              </Form.Item>
+            </Input.Group>
+          </Form.Item>
+        ) : (
+          ""
+        )}
+        {type === "ordinar" ? (
+          <Form.Item>
+            <Input.Group compact>
+              <Form.Item name={"descriptionRu"} noStyle>
+                <Input
+                  placeholder="Description Russian Optional"
+                  style={{ width: "100%" }}
+                />
+              </Form.Item>
+            </Input.Group>
+          </Form.Item>
+        ) : (
+          ""
+        )}
         <Form.Item>
           <Input.Group compact>
             <Form.Item

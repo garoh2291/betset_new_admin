@@ -15,6 +15,7 @@ export const SportPositionItemList = ({
   onSubEvent,
   globalPositionEn,
   globalPositionRu,
+  type,
 }) => {
   const itemEn = finalPositionsEn[index];
   const itemRu = finalPositionsRu[index];
@@ -49,6 +50,7 @@ export const SportPositionItemList = ({
               onSubEvent={onSubEvent}
               globalPositionEn={globalPositionEn}
               globalPositionRu={globalPositionRu}
+              type={type}
             />
           ))}
         </Typography>

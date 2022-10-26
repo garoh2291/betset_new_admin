@@ -1,0 +1,11 @@
+.new_express_main {
+  padding: 20px;
+}
+
+.new_express_head {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

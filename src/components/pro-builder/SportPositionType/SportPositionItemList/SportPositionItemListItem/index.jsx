@@ -15,6 +15,7 @@ export const SportPositionItemListItem = memo(
     onSubEvent,
     globalPositionEn,
     globalPositionRu,
+    type,
   }) => {
     const [checked, setChecked] = useState(false);
     const positionsEn = itemEn.Stakes[index];
@@ -74,6 +75,7 @@ export const SportPositionItemListItem = memo(
             positionDetails={positionDetails}
             onSubEvent={onSubEvent}
             changeChecked={changeChecked}
+            type={type}
           />
         )}
       </>

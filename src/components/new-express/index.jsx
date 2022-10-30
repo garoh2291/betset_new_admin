@@ -1,5 +1,6 @@
 import { Button, Switch } from "antd";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
+import { GameContext } from "../../context";
 import { LiteBuilder } from "../lite-builder";
 import { NewExpressModal } from "../NewExpressModal";
 import { ProBuilder } from "../pro-builder";
@@ -8,10 +9,13 @@ import "./styles.css";
 export const NewExpress = () => {
   const [mode, setMode] = useState(false);
   const [isExpressModalOpen, setIsExpressModalOpen] = useState(false);
+  const { betGames } = useContext(GameContext);
 
-  const editModalOpenHandler = useCallback(() => {
+  const isDisable = !!betGames.length;
+
+  const editExpressOpenHandler = useCallback(() => {
     setIsExpressModalOpen((prev) => !prev);
-  }, [isExpressModalOpen]);
+  }, [setIsExpressModalOpen]);
 
   const changeMode = () => setMode((prev) => !prev);
   return (
@@ -22,7 +26,11 @@ export const NewExpress = () => {
           unCheckedChildren="Lite"
           onChange={changeMode}
         />
-        <Button type="danger" onClick={editModalOpenHandler}>
+        <Button
+          type="danger"
+          onClick={editExpressOpenHandler}
+          disabled={!isDisable}
+        >
           View Cheque
         </Button>
       </div>

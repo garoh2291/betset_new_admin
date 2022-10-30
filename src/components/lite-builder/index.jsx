@@ -13,6 +13,7 @@ import { DescriptionForm } from "../Description";
 import { RuForm } from "../RuForm";
 import { checkProbability, uid } from "../../helpers";
 import { GameContext } from "../../context";
+import { randomizer } from "../../helpers/smallFunctions";
 
 const tailLayout = {
   wrapperCol: {
@@ -92,7 +93,7 @@ export const LiteBuilder = () => {
       },
       risk: checkProbability(cf, probPrc),
       sport,
-      coeff: +cf,
+      coeff: +cf + parseFloat(randomizer()),
       league: {
         am: leagueAm,
         en: leagueEn,

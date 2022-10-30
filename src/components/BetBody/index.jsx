@@ -5,8 +5,9 @@ import { GameContext } from "../../context";
 import { sportType } from "../../helpers";
 import "./styles.css";
 
-export const BetBody = ({ isSlipActive, lang, row }) => {
+export const BetBody = ({ isSlipActive, lang, row, editModalOpenHandler }) => {
   const { setBetGames } = useContext(GameContext);
+  console.log(row.coeff);
   const { id } = row;
   console.log(isSlipActive);
   const deleteRow = () => {
@@ -47,12 +48,12 @@ export const BetBody = ({ isSlipActive, lang, row }) => {
         <button className="delete_button" onClick={deleteRow}>
           <DeleteTwoTone style={{ height: 20, width: 20 }} />
         </button>
-        {/* <button
+        <button
           className="change_button"
           onClick={() => editModalOpenHandler(row)}
         >
           <EditTwoTone style={{ height: 20, width: 20 }} />
-        </button> */}
+        </button>
       </TableCell>
     </TableRow>
   );

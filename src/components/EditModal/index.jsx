@@ -1,14 +1,22 @@
 import { message, Modal } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { editGameThunk } from "../../redux/gameSlice";
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { checkProbability } from "../../helpers";
+import { checkProbability, uid } from "../../helpers";
+import { useLocation } from "react-router-dom";
+import { GameContext } from "../../context";
 
 export const EditModal = ({ onClose, editGame }) => {
   const dispatch = useDispatch();
-
+  const { betGames, setBetGames } = useContext(GameContext);
   const { _id } = editGame;
+  console.log(editGame);
+  const location = useLocation();
+  console.log(location.pathname);
+  const type = location.pathname === "/ordinar-board" ? "ordinar" : "express";
+
+  console.log(type);
 
   const [inputsData, setInputsData] = useState({
     coeff: {
@@ -88,6 +96,22 @@ export const EditModal = ({ onClose, editGame }) => {
     });
   };
 
+  const setNewGameHandler = (editFormData) => {
+    setBetGames((prev) => {
+      return prev.map((game) => {
+        if (game.id === editFormData.id) {
+          return editFormData;
+        }
+        return game;
+      });
+    });
+
+    message.success("Game is changed");
+    onClose();
+    console.log(editFormData);
+    console.log(betGames);
+  };
+
   const onFinish = (e) => {
     e.preventDefault();
     const {
@@ -113,6 +137,7 @@ export const EditModal = ({ onClose, editGame }) => {
     } = inputsData;
 
     const editFormData = {
+      id: type === "ordinar" ? undefined : editGame.id,
       team1: {
         am: team1Am,
         en: team1En,
@@ -140,16 +165,18 @@ export const EditModal = ({ onClose, editGame }) => {
         ru: positionRu,
       },
       description: {
-        am: descriptionAm,
-        en: descriptionEn,
-        ru: descriptionRu,
+        am: type === "ordinar" ? descriptionAm : undefined,
+        en: type === "ordinar" ? descriptionEn : undefined,
+        ru: type === "ordinar" ? descriptionRu : undefined,
       },
     };
 
     if (editFormData.risk === "wrong") {
       message.error("You can't add this game");
     } else {
-      dispatch(editGameThunk({ editFormData, _id, onClose }));
+      type === "ordinar"
+        ? dispatch(editGameThunk({ editFormData, _id, onClose }))
+        : setNewGameHandler(editFormData);
     }
   };
 
@@ -352,49 +379,53 @@ export const EditModal = ({ onClose, editGame }) => {
             </FormGroup>
           </Col>
         </Row>
-        <Row>
-          <Col md={12}>
-            <FormGroup>
-              <Label for="descriptionAm">Description Arm</Label>
-              <Input
-                value={inputsData.descriptionAm.value}
-                id="descriptionAm"
-                name="descriptionAm"
-                placeholder="Description Am"
-                type="text"
-                onChange={handleChange}
-              />
-            </FormGroup>
-          </Col>
-          <Col md={12}>
-            <FormGroup>
-              <Label for="descriptionEn">Description En</Label>
-              <Input
-                value={inputsData.descriptionEn.value}
-                id="descriptionEn"
-                name="descriptionEn"
-                placeholder="Description En"
-                type="text"
-                onChange={handleChange}
-              />
-            </FormGroup>
-          </Col>
-          <Col md={12}>
-            <FormGroup>
-              <Label for="descriptionRu">Description Ru</Label>
-              <Input
-                value={inputsData.descriptionRu.value}
-                id="descriptionRu"
-                name="descriptionRu"
-                placeholder="Description Ru Optional"
-                type="text"
-                onChange={handleChange}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+        {type === "ordinar" ? (
+          <Row>
+            <Col md={12}>
+              <FormGroup>
+                <Label for="descriptionAm">Description Arm</Label>
+                <Input
+                  value={inputsData.descriptionAm.value}
+                  id="descriptionAm"
+                  name="descriptionAm"
+                  placeholder="Description Am"
+                  type="text"
+                  onChange={handleChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={12}>
+              <FormGroup>
+                <Label for="descriptionEn">Description En</Label>
+                <Input
+                  value={inputsData.descriptionEn.value}
+                  id="descriptionEn"
+                  name="descriptionEn"
+                  placeholder="Description En"
+                  type="text"
+                  onChange={handleChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={12}>
+              <FormGroup>
+                <Label for="descriptionRu">Description Ru</Label>
+                <Input
+                  value={inputsData.descriptionRu.value}
+                  id="descriptionRu"
+                  name="descriptionRu"
+                  placeholder="Description Ru Optional"
+                  type="text"
+                  onChange={handleChange}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+        ) : (
+          ""
+        )}
         <Button color="primary" onClick={onFinish}>
-          Edit Task
+          Edit Games
         </Button>{" "}
       </Form>
     </Modal>

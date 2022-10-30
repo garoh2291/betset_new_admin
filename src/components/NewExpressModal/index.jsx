@@ -1,5 +1,5 @@
-import { Button, Modal, Radio } from "antd";
-import React, { useContext, useState } from "react";
+import { Button, message, Modal, Radio } from "antd";
+import React, { useCallback, useContext, useState } from "react";
 import { GameContext } from "../../context";
 import mainImg from "../../assets/logo.png";
 import domtoimage from "dom-to-image";
@@ -8,11 +8,54 @@ import { saveAs } from "file-saver";
 import "./styles.css";
 import { ExpressTable } from "../ExpressTable";
 import { BetFooter } from "../BetFooter";
+import { useDispatch } from "react-redux";
+import { SetExpressThunk } from "../../redux/gameSlice";
+import { EditModal } from "../EditModal";
 
 export const NewExpressModal = ({ onClose }) => {
+  const dispatch = useDispatch();
   const { betGames } = useContext(GameContext);
   const [isDemo, setIsDemo] = useState("real");
   const [lang, setLang] = useState("am");
+  const [isSaved, setIsSaved] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [editModalGame, setEditModalGame] = useState(null);
+
+  const editModalOpenHandler = useCallback(
+    (game) => {
+      if (isEditOpen) {
+        setIsEditOpen(false);
+        setEditModalGame(null);
+      } else {
+        setIsEditOpen(true);
+        setEditModalGame(game);
+      }
+    },
+    [isEditOpen]
+  );
+
+  const cbSuccess = () => {
+    message.success("Game successfully added");
+    setIsSaved(true);
+  };
+
+  const cbError = () => {
+    message.error("Can't add this Game");
+  };
+
+  const saveToBackHandler = () => {
+    const totalCoeff = betGames.reduce((sum, game) => {
+      return (sum *= game.coeff);
+    }, 1);
+
+    const newExpress = {
+      games: betGames,
+      totalCoeff,
+      status: "pending",
+    };
+
+    dispatch(SetExpressThunk({ newExpress, cbSuccess, cbError }));
+  };
 
   const onLangChange = (e) => {
     const language = e.target.value;
@@ -50,7 +93,6 @@ export const NewExpressModal = ({ onClose }) => {
     <Modal
       title="Express "
       open={true}
-      //   onOk={onFinish}
       onCancel={onClose}
       width={1000}
       footer={null}
@@ -61,25 +103,45 @@ export const NewExpressModal = ({ onClose }) => {
           <Radio.Button value="en">English</Radio.Button>
           <Radio.Button value="ru">Russian</Radio.Button>
         </Radio.Group>
-        <Radio.Group onChange={onDemoChange} defaultValue="real">
+        <Radio.Group
+          style={{ marginLeft: 10 }}
+          onChange={onDemoChange}
+          defaultValue="real"
+        >
           <Radio.Button value="real">Real</Radio.Button>
           <Radio.Button value="demo">Demo</Radio.Button>
         </Radio.Group>
-        <Button onClick={downloadHandler.bind(this)}>Download</Button>
+        <Button onClick={saveToBackHandler}>Save to </Button>
+        <Button onClick={downloadHandler.bind(this)} disabled={!isSaved}>
+          Download
+        </Button>
       </div>
+
       <div className="betslip_main" id="my-node1">
-        <div className="betslip_wrapper" id="my-node">
-          <div
-            className="betslip_image"
-            style={{ top: `calc(40px + ${logoPos(betGames)} )` }}
-          >
-            {" "}
-            <img src={mainImg} alt="some" />
+        {!!betGames.length && (
+          <div className="betslip_wrapper" id="my-node">
+            <div
+              className="betslip_image"
+              style={{ top: `calc(40px + ${logoPos(betGames)} )` }}
+            >
+              {" "}
+              <img src={mainImg} alt="some" />
+            </div>
+            <ExpressTable
+              lang={lang}
+              isDemo={isDemo}
+              editModalOpenHandler={editModalOpenHandler}
+            />
+            <BetFooter lang={lang} />
           </div>
-          <ExpressTable lang={lang} isDemo={isDemo} />
-          <BetFooter lang={lang} />
-        </div>
+        )}
       </div>
+      {isEditOpen && (
+        <EditModal
+          onClose={() => setIsEditOpen(false)}
+          editGame={editModalGame}
+        />
+      )}
     </Modal>
   );
 };

@@ -40,6 +40,28 @@ export const SetGameThunk = createAsyncThunk(
   }
 );
 
+export const SetExpressThunk = createAsyncThunk(
+  "games/setGameThunk",
+  function ({ newExpress, cbSuccess, cbError }, { dispatch, rejectWithValue }) {
+    fetch(`${BACKEND_URL}/express`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(newExpress),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Server Error!");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        cbSuccess();
+        dispatch(addExpress({ data }));
+      })
+      .catch((err) => cbError);
+  }
+);
+
 export const DeleteGameThunk = createAsyncThunk(
   "games/deleteGameThink",
   function (_id, { dispatch, rejectWithValue }) {
@@ -89,6 +111,7 @@ const gameSlice = createSlice({
   name: "games",
   initialState: {
     games: null,
+    express: [],
   },
   reducers: {
     setGames(state, action) {
@@ -129,9 +152,19 @@ const gameSlice = createSlice({
         games,
       };
     },
+    addExpress(state, action) {
+      const newExpress = action.payload.data;
+      const express = [...state.games, newExpress];
+
+      return {
+        ...state,
+        express,
+      };
+    },
   },
 });
 
-const { setGames, addGame, deleteGame, editGame } = gameSlice.actions;
+const { setGames, addGame, deleteGame, editGame, addExpress } =
+  gameSlice.actions;
 
 export default gameSlice.reducer;

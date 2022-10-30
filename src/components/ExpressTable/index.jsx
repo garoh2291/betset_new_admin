@@ -11,7 +11,7 @@ import { BETSLIP_DATA } from "../../data";
 import "./styles.css";
 import { BetBody } from "../BetBody";
 
-export const ExpressTable = ({ lang, isDemo }) => {
+export const ExpressTable = ({ lang, isDemo, editModalOpenHandler }) => {
   const { betGames, setBetGames } = useContext(GameContext);
   console.log(betGames);
   console.log(lang, isDemo);
@@ -71,7 +71,7 @@ export const ExpressTable = ({ lang, isDemo }) => {
                 isSlipActive={isDemo === "real" ? true : false}
                 lang={lang}
                 row={row}
-                // editModalOpenHandler={editModalOpenHandler}
+                editModalOpenHandler={editModalOpenHandler}
               />
             ))}
           </TableBody>

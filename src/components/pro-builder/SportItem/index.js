@@ -14,6 +14,7 @@ import { message, Skeleton } from "antd";
 
 import { checkProbability, uid } from "../../../helpers";
 import { GameContext } from "../../../context";
+import { randomizer } from "../../../helpers/smallFunctions";
 
 export const SportItem = memo(({ match, type }) => {
   const { setBetGames } = useContext(GameContext);
@@ -84,7 +85,7 @@ export const SportItem = memo(({ match, type }) => {
       },
       risk: checkProbability(coef, probPrc),
       sport: matchDetailsEn[0].SN.toLowerCase(),
-      coeff: +coef,
+      coeff: +coef + parseFloat(randomizer()),
       league: {
         am: matchDetailsAm[0].CN,
         en: matchDetailsEn[0].CN,

@@ -77,6 +77,7 @@ export function checkProbability(cf, probability) {
   const risk =
     ((parseFloat(cf) * parseFloat(probability)) / 100 - 1) /
     (parseFloat(cf) - 1);
+  console.log(risk);
   if (risk >= 0.9) {
     return "best";
   } else if (risk >= 0.7 && risk < 0.9) {

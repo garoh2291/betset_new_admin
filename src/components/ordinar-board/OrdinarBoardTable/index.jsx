@@ -26,6 +26,7 @@ export const OrdinarBoardTable = ({ editModalOpenHandler }) => {
   const deleteGameHandler = (_id) => {
     dispatch(DeleteGameThunk(_id));
   };
+  console.log(games);
 
   return (
     <div className="game_table_wrapper">

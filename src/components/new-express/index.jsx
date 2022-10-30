@@ -9,9 +9,13 @@ import "./styles.css";
 export const NewExpress = () => {
   const [mode, setMode] = useState(false);
   const [isExpressModalOpen, setIsExpressModalOpen] = useState(false);
-  const { betGames } = useContext(GameContext);
+  const { betGames, setBetGames } = useContext(GameContext);
 
   const isDisable = !!betGames.length;
+
+  const clearExpressHandler = () => {
+    setBetGames([]);
+  };
 
   const editExpressOpenHandler = useCallback(() => {
     setIsExpressModalOpen((prev) => !prev);
@@ -32,6 +36,9 @@ export const NewExpress = () => {
           disabled={!isDisable}
         >
           View Cheque
+        </Button>
+        <Button onClick={clearExpressHandler} type="danger">
+          Clear Cheque
         </Button>
       </div>
 

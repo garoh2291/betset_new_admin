@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { generateQuery } from "../../helpers";
 import { getAllGamesThunk } from "../../redux/gameSlice";
+import { getUserDetailsThunk } from "../../redux/userSlice/user-async";
 import { EditModal } from "../EditModal";
 import { OrdinarBoardTable } from "./OrdinarBoardTable";
 import { OrdinarFilter } from "./OrdinarFilter";
@@ -10,8 +12,14 @@ import "./styles.css";
 
 export const OrdinarBoard = () => {
   const [searchSortQuery, setSearchSortQuery] = useState([]);
-
+  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const cb = useCallback(
+    () => navigate("/login", { replace: true }),
+    [navigate]
+  );
 
   //Edit Existing ordinars
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -55,6 +63,14 @@ export const OrdinarBoard = () => {
     const query = generateQuery(searchSortQuery);
     dispatch(getAllGamesThunk(query));
   }, [searchSortQuery, dispatch]);
+
+  useEffect(() => {
+    dispatch(getUserDetailsThunk(cb));
+  }, [dispatch, cb]);
+
+  if (!user) {
+    return <h1>Loading</h1>;
+  }
 
   return (
     <div className="ordinar_board_main">

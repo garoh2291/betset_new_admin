@@ -1,7 +1,6 @@
 import { Button } from "antd";
 import React from "react";
 import { memo, useState } from "react";
-import { DescriptionForm } from "../../../../Description";
 import { ProDescritptionAndProbability } from "../../../ProDescription";
 
 export const SportPositionItemListItem = memo(

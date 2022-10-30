@@ -142,10 +142,10 @@ export function Team2En({ sport }) {
 }
 
 export function Team1Ru({ sport }) {
-  const [team, setTeam] = useState("");
-  const changeHandle = (e) => {
-    setTeam(e);
-  };
+  // const [team, setTeam] = useState("");
+  // const changeHandle = (e) => {
+  //   setTeam(e);
+  // };
   return (
     <Form.Item name={"team1Ru"} noStyle rules={[{ required: true }]}>
       <Input placeholder="команда 1" style={{ width: "25%" }} />
@@ -154,10 +154,10 @@ export function Team1Ru({ sport }) {
 }
 
 export function Team2Ru({ sport }) {
-  const [team, setTeam] = useState("");
-  const changeHandle = (e) => {
-    setTeam(e);
-  };
+  // const [team, setTeam] = useState("");
+  // const changeHandle = (e) => {
+  //   setTeam(e);
+  // };
   return (
     <Form.Item name={"team2Ru"} noStyle rules={[{ required: true }]}>
       <Input placeholder="команда 2" style={{ width: "25%" }} />

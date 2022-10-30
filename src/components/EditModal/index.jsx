@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { editGameThunk } from "../../redux/gameSlice";
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { checkProbability, uid } from "../../helpers";
+import { checkProbability } from "../../helpers";
 import { useLocation } from "react-router-dom";
 import { GameContext } from "../../context";
 

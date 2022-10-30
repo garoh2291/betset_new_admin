@@ -18,23 +18,17 @@ export const SportPositionType = ({
   const enPositionsArray = eventsEn[index].StakeTypes;
   const ruPositionsArray = eventsRu[index].StakeTypes;
 
-  const finalPositionsAm = armPositionArray.filter((item, index) => {
+  function sportPositionTypeFilter(item, index) {
     if (index < 11 || index === 13) {
       return item;
     }
-  });
+  }
 
-  const finalPositionsEn = enPositionsArray.filter((item, index) => {
-    if (index < 11 || index === 13) {
-      return item;
-    }
-  });
+  const finalPositionsAm = armPositionArray.filter(sportPositionTypeFilter);
 
-  const finalPositionsRu = ruPositionsArray.filter((item, index) => {
-    if (index < 11 || index === 13) {
-      return item;
-    }
-  });
+  const finalPositionsEn = enPositionsArray.filter(sportPositionTypeFilter);
+
+  const finalPositionsRu = ruPositionsArray.filter(sportPositionTypeFilter);
 
   const globalPosition = event.PN ? event.PN : "";
   const globalPositionEn = eventsEn[index].PN ? eventsEn[index].PN : "";

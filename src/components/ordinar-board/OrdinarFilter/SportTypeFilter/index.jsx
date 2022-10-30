@@ -1,15 +1,8 @@
 import React from "react";
-import { Button, Form, Input, Select, DatePicker } from "antd";
+import { Form, Input, Select, DatePicker } from "antd";
 import moment from "moment";
 import "./styles.css";
 const { Option } = Select;
-
-const tailLayout = {
-  wrapperCol: {
-    offset: 1,
-    span: 16,
-  },
-};
 
 const layout = {
   labelCol: {

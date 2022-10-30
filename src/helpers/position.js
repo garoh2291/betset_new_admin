@@ -88,11 +88,11 @@ export function PositionEn({ sport }) {
 }
 
 export function PositionRu({ sport }) {
-  const [position, setPosition] = useState("");
+  // const [position, setPosition] = useState("");
 
-  const changeHandle = (e) => {
-    setPosition(e);
-  };
+  // const changeHandle = (e) => {
+  //   setPosition(e);
+  // };
 
   return (
     <Form.Item name={"betRu"} noStyle rules={[{ required: true }]}>

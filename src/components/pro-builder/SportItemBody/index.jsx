@@ -9,7 +9,7 @@ export const SportItemBody = ({
   onSubEvent,
   type,
 }) => {
-  const array = matchDetailsAm.filter((item, index, array) => {
+  function filteredArrayAm(item, index, array) {
     if (
       index === 0 ||
       array[index].PN === "Անկյունայիններ" ||
@@ -17,9 +17,8 @@ export const SportItemBody = ({
     ) {
       return item;
     }
-  });
-
-  const arrayEn = matchDetailsEn.filter((item, index, array) => {
+  }
+  function filteredArrayEn(item, index, array) {
     if (
       index === 0 ||
       array[index].PN === "Corners" ||
@@ -27,9 +26,9 @@ export const SportItemBody = ({
     ) {
       return item;
     }
-  });
+  }
 
-  const arrayRu = matchDetailsRu.filter((item, index, array) => {
+  function filteredArrayRu(item, index, array) {
     if (
       index === 0 ||
       array[index].PN === "Угловые" ||
@@ -37,7 +36,13 @@ export const SportItemBody = ({
     ) {
       return item;
     }
-  });
+    return;
+  }
+
+  const array = matchDetailsAm.filter(filteredArrayAm);
+  const arrayEn = matchDetailsEn.filter(filteredArrayEn);
+
+  const arrayRu = matchDetailsRu.filter(filteredArrayRu);
 
   return (
     <>

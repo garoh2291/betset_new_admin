@@ -12,7 +12,7 @@ import "./styles.css";
 import { BetBody } from "../BetBody";
 
 export const ExpressTable = ({ lang, isDemo, editModalOpenHandler }) => {
-  const { betGames, setBetGames } = useContext(GameContext);
+  const { betGames } = useContext(GameContext);
   console.log(betGames);
   console.log(lang, isDemo);
   return (

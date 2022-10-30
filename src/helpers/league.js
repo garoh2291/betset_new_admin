@@ -88,11 +88,11 @@ export function LeagueEn({ sport }) {
 }
 
 export function LeagueRu({ sport }) {
-  const [league, setLeague] = useState("");
+  // const [league, setLeague] = useState("");
 
-  const changeHandle = (e) => {
-    setLeague(e);
-  };
+  // const changeHandle = (e) => {
+  //   setLeague(e);
+  // };
 
   return (
     <Form.Item name={"leagueRu"} noStyle rules={[{ required: true }]}>

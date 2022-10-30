@@ -1,14 +1,14 @@
 import { Form, Input } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import { LeagueAm } from "../../helpers/league";
 import { PositionAm } from "../../helpers/position";
 import { Team1Am, Team2Am } from "../../helpers/teams";
 
 export const ArmForm = ({ sport }) => {
-  const [league, setLeague] = useState("");
-  const changeHandle = (e) => {
-    setLeague(e);
-  };
+  // const [league, setLeague] = useState("");
+  // const changeHandle = (e) => {
+  //   setLeague(e);
+  // };
 
   return (
     <Form.Item>

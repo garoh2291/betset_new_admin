@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { message } from "antd";
 import { removeUser, setUser } from ".";
 import { BACKEND_URL } from "../../data";
+
 // import { openNotificationWithIcon } from "../../helpers/notification";
 import { getToken } from "../../helpers/token";
 
@@ -71,7 +72,6 @@ export const getUserDetailsThunk = createAsyncThunk(
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.error || data.errors) {
           cb();
           dispatch(removeUser());

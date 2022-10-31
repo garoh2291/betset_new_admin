@@ -16,7 +16,6 @@ export const NewOrdinar = () => {
     () => navigate("/login", { replace: true }),
     [navigate]
   );
-  console.log(user);
 
   const dispatch = useDispatch();
   useEffect(() => {

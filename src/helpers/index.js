@@ -5,6 +5,7 @@ import tennis from "../assets/tennis.png";
 import ttennis from "../assets/ttennis.png";
 import volleyball from "../assets/volleyball.png";
 import basketball from "../assets/basketball.jpeg";
+import * as moment from "moment";
 ///
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
@@ -13,7 +14,8 @@ import WbCloudyIcon from "@mui/icons-material/WbCloudy";
 
 const today = new Date();
 const today1 = new Date(`${today} UTC`);
-const finalDate = today1.toISOString();
+const finalDate = moment(today1).utc().toISOString();
+// const finalDate = "2022-10-01";
 
 export function sportType(sport) {
   switch (sport) {

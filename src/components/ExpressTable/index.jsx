@@ -13,8 +13,7 @@ import { BetBody } from "../BetBody";
 
 export const ExpressTable = ({ lang, isDemo, editModalOpenHandler }) => {
   const { betGames } = useContext(GameContext);
-  console.log(betGames);
-  console.log(lang, isDemo);
+
   return (
     <div className="table_wrapper_main">
       <TableContainer

@@ -12,7 +12,6 @@ export const OrdinarGameRow = ({
   editModalOpenHandler,
 }) => {
   const { _id } = game;
-  console.log(game);
 
   return (
     <TableRow

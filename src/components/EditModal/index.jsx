@@ -9,14 +9,10 @@ import { GameContext } from "../../context";
 
 export const EditModal = ({ onClose, editGame }) => {
   const dispatch = useDispatch();
-  const { betGames, setBetGames } = useContext(GameContext);
+  const { setBetGames } = useContext(GameContext);
   const { _id } = editGame;
-  console.log(editGame);
   const location = useLocation();
-  console.log(location.pathname);
   const type = location.pathname === "/ordinar-board" ? "ordinar" : "express";
-
-  console.log(type);
 
   const [inputsData, setInputsData] = useState({
     coeff: {
@@ -108,8 +104,6 @@ export const EditModal = ({ onClose, editGame }) => {
 
     message.success("Game is changed");
     onClose();
-    console.log(editFormData);
-    console.log(betGames);
   };
 
   const onFinish = (e) => {

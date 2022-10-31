@@ -1,4 +1,5 @@
 import { BACKEND_URL } from "../data";
+import fetch from "cross-fetch";
 
 function get(url) {
   return fetch(url, {

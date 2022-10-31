@@ -35,7 +35,10 @@ export const SportItem = memo(({ match, type }) => {
   const s = new Date(`${match.TempEventDate}`);
   const dt = moment(s).format("YYYY-MM-DD HH:mm:ss");
   const dt2 = new Date(`${dt} UTC`);
-  const finalDate = dt2.toISOString();
+
+  const finalDate = moment(dt2).utc().toISOString();
+
+  // const finalDate = "2022-10-01";
 
   //////
 

@@ -32,9 +32,7 @@ export const LoginForm = () => {
         labelAlign={"left"}
         wrapperCol={{ span: 18 }}
         onFinish={loginHandler}
-        onFinishFailed={(error) => {
-          console.log({ error });
-        }}
+        onFinishFailed={(error) => {}}
       >
         <Form.Item
           name={"email"}

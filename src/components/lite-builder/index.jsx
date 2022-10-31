@@ -77,7 +77,8 @@ export const LiteBuilder = () => {
     const newDate = moment(values.date).format("YYYY-MM-DD");
     const newTime = moment(time).format("HH:mm:ss");
     const newDate2 = new Date(`${newDate} ${newTime} UTC`);
-    const finalDate = newDate2.toISOString();
+    // const finalDate = newDate2.toISOString();
+    const finalDate = moment(newDate2).utc().toISOString();
 
     const newGame = {
       id: type === "ordinar" ? undefined : uid(),

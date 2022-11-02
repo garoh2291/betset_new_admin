@@ -32,8 +32,9 @@ const layout = {
 };
 
 export const LiteBuilder = () => {
+  const [matchDay, setMatchDay] = useState(false);
   const location = useLocation();
-  const type = location.pathname === "/" ? "ordinar" : "express";
+  const type = location.pathname === "/new-express" ? "express" : "ordinar";
   const { setBetGames } = useContext(GameContext);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -50,9 +51,12 @@ export const LiteBuilder = () => {
     setSport(e);
   };
 
+  const onMatchDayChange = (e) => {
+    setMatchDay((prev) => !prev);
+  };
+
   const onFinish = (values) => {
     const {
-      // risk,
       betAm,
       betEn,
       betRu,
@@ -76,9 +80,8 @@ export const LiteBuilder = () => {
 
     const newDate = moment(values.date).format("YYYY-MM-DD");
     const newTime = moment(time).format("HH:mm:ss");
-    const newDate2 = new Date(`${newDate} ${newTime} UTC`);
-    // const finalDate = newDate2.toISOString();
-    const finalDate = moment(newDate2).utc().toISOString();
+    const newDate2 = new Date(`${newDate} ${newTime}`);
+    const finalDate = moment(newDate2).utc(8).toISOString();
 
     const newGame = {
       id: type === "ordinar" ? undefined : uid(),
@@ -110,6 +113,7 @@ export const LiteBuilder = () => {
         en: descriptionEn,
         ru: descriptionRu,
       },
+      matchDay: matchDay ? "yes" : "no",
       date: finalDate,
     };
 
@@ -123,7 +127,7 @@ export const LiteBuilder = () => {
             return [...prev, newGame];
           });
     }
-    form.resetFields();
+    // form.resetFields();
   };
   return (
     <div className="lite_builder_wrapper">
@@ -136,7 +140,11 @@ export const LiteBuilder = () => {
             name="control-hooks"
             onFinish={onFinish}
           >
-            <OtherFrom changeSport={changeSport} />
+            <OtherFrom
+              changeSport={changeSport}
+              onMatchDayChange={onMatchDayChange}
+              type={type}
+            />
 
             <ArmForm sport={sport} />
             <EngForm sport={sport} />

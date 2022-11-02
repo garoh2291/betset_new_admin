@@ -1,6 +1,6 @@
 export const NAVBAR_PAGES = {
   new_ordinar: {
-    link: "",
+    link: "new-ordinar",
     label: "New Ordinar",
   },
   ordinar_board: {
@@ -10,6 +10,10 @@ export const NAVBAR_PAGES = {
   new_express: {
     link: "new-express",
     label: "New Express",
+  },
+  express_board: {
+    link: "",
+    label: "Express Board",
   },
 };
 

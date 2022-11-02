@@ -13,7 +13,6 @@ export const EditModal = ({ onClose, editGame }) => {
   const { _id } = editGame;
   const location = useLocation();
   const type = location.pathname === "/ordinar-board" ? "ordinar" : "express";
-
   const [inputsData, setInputsData] = useState({
     coeff: {
       value: editGame.coeff,

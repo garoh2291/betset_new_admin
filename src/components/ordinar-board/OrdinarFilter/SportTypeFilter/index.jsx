@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input, Select, DatePicker } from "antd";
 import moment from "moment";
 import "./styles.css";
+import { useLocation } from "react-router-dom";
 const { Option } = Select;
 
 const layout = {
@@ -15,10 +16,18 @@ const layout = {
 
 export const SportTypeFilter = ({ getTasks }) => {
   const [form] = Form.useForm();
-
-  const chageSportFilter = (value) => {
+  const location = useLocation();
+  const type = location.pathname === "/ordinar-board" ? "ordinar" : "express";
+  const changeSportFilter = (value) => {
     getTasks({
       queryRoute: "sport",
+      queryValue: value,
+    });
+  };
+
+  const changeStatusHandle = (value) => {
+    getTasks({
+      queryRoute: "status",
       queryValue: value,
     });
   };
@@ -58,23 +67,40 @@ export const SportTypeFilter = ({ getTasks }) => {
       <Form {...layout} form={form} name="control-hooks">
         <Form.Item>
           <Input.Group compact>
-            <Form.Item noStyle>
-              <Select
-                showSearch
-                placeholder="Select Sport"
-                style={{ width: "25%" }}
-                onSelect={chageSportFilter}
-              >
-                <Option value="">All</Option>
-                <Option value="football">Football</Option>
-                <Option value="volleyball">Volleyball</Option>
-                <Option value="basketball">BasketBall</Option>
-                <Option value="regby">Regby</Option>
-                <Option value="tennis">Tennis</Option>
-                <Option value="tableTennis">Table Tennis</Option>
-                <Option value="hockey">Hockey</Option>
-              </Select>
-            </Form.Item>
+            {type === "ordinar" ? (
+              <Form.Item noStyle>
+                <Select
+                  showSearch
+                  placeholder="Select Sport"
+                  style={{ width: "25%" }}
+                  onSelect={changeSportFilter}
+                >
+                  <Option value="">All</Option>
+                  <Option value="football">Football</Option>
+                  <Option value="volleyball">Volleyball</Option>
+                  <Option value="basketball">BasketBall</Option>
+                  <Option value="regby">Regby</Option>
+                  <Option value="tennis">Tennis</Option>
+                  <Option value="tableTennis">Table Tennis</Option>
+                  <Option value="hockey">Hockey</Option>
+                </Select>
+              </Form.Item>
+            ) : (
+              <Form.Item noStyle>
+                <Select
+                  showSearch
+                  placeholder="Select Status"
+                  style={{ width: "25%" }}
+                  onSelect={changeStatusHandle}
+                >
+                  <Option value="">All</Option>
+                  <Option value="pending">Pending</Option>
+                  <Option value="win">Win</Option>
+                  <Option value="loose">Loose</Option>
+                </Select>
+              </Form.Item>
+            )}
+
             <Form.Item noStyle>
               <span className="label_start_from">Start From:</span>
               <DatePicker

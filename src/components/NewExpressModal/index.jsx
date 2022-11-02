@@ -14,7 +14,7 @@ import { EditModal } from "../EditModal";
 
 export const NewExpressModal = ({ onClose }) => {
   const dispatch = useDispatch();
-  const { betGames } = useContext(GameContext);
+  const { betGames, setBetGames } = useContext(GameContext);
   const [isDemo, setIsDemo] = useState("real");
   const [lang, setLang] = useState("am");
   const [isSaved, setIsSaved] = useState(false);
@@ -48,10 +48,19 @@ export const NewExpressModal = ({ onClose }) => {
       return (sum *= game.coeff);
     }, 1);
 
+    let earlyDate = betGames[0].date;
+    for (let i = 0; i < betGames.length; i++) {
+      let checkingDate = new Date(betGames[i].date).getTime();
+      if (checkingDate < new Date(earlyDate).getTime()) {
+        earlyDate = betGames[i].date;
+      }
+    }
+
     const newExpress = {
       games: betGames,
       totalCoeff,
       status: "pending",
+      date: earlyDate,
     };
 
     dispatch(SetExpressThunk({ newExpress, cbSuccess, cbError }));
@@ -72,8 +81,18 @@ export const NewExpressModal = ({ onClose }) => {
     domtoimage
       .toBlob(document.getElementById("my-node1"))
       .then(function (blob) {
-        saveAs(blob, "myImage.png");
+        saveAs(blob, "myImage.jpeg");
       });
+  };
+
+  const onCloseHandler = () => {
+    if (isSaved) {
+      onClose();
+
+      setBetGames([]);
+    } else {
+      onClose();
+    }
   };
 
   function logoPos(games) {
@@ -93,7 +112,7 @@ export const NewExpressModal = ({ onClose }) => {
     <Modal
       title="Express "
       open={true}
-      onCancel={onClose}
+      onCancel={onCloseHandler}
       width={1000}
       footer={null}
     >
@@ -111,7 +130,9 @@ export const NewExpressModal = ({ onClose }) => {
           <Radio.Button value="real">Real</Radio.Button>
           <Radio.Button value="demo">Demo</Radio.Button>
         </Radio.Group>
-        <Button onClick={saveToBackHandler}>Save to </Button>
+        <Button onClick={saveToBackHandler} disabled={!!isSaved}>
+          Save to{" "}
+        </Button>
         <Button onClick={downloadHandler.bind(this)} disabled={!isSaved}>
           Download
         </Button>

@@ -1,5 +1,4 @@
 import { BACKEND_URL } from "../data";
-import fetch from "cross-fetch";
 
 function get(url) {
   return fetch(url, {
@@ -12,4 +11,8 @@ function get(url) {
 }
 export function getGamesRequest(query) {
   return get(`${BACKEND_URL}/game${query ? `?${query}` : ""}`);
+}
+
+export function getGamesRequestExpress(queryExpress) {
+  return get(`${BACKEND_URL}/express${queryExpress ? `?${queryExpress}` : ""}`);
 }

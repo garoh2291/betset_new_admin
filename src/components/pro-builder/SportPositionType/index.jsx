@@ -19,7 +19,7 @@ export const SportPositionType = ({
   const ruPositionsArray = eventsRu[index].StakeTypes;
 
   function sportPositionTypeFilter(item, index) {
-    if (index < 11 || index === 13) {
+    if (index < 16) {
       return item;
     }
   }

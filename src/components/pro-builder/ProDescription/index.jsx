@@ -1,4 +1,6 @@
-import { Button, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
+import { useContext, useState } from "react";
+import { GameContext } from "../../../context";
 
 const tailLayout = {
   wrapperCol: {
@@ -21,6 +23,7 @@ export const ProDescritptionAndProbability = ({
   changeChecked,
   type,
 }) => {
+  const [matchDay, setMatchDay] = useState(false);
   const [form] = Form.useForm();
   const onFinish = (values) => {
     const additionalDetails = {
@@ -32,10 +35,15 @@ export const ProDescritptionAndProbability = ({
       descriptionRu: values.descriptionRu,
       probPrc: values.probPrc,
       coef: positionDetails.coef,
+      matchDay: matchDay,
     };
     onSubEvent(additionalDetails);
     form.resetFields();
     changeChecked();
+  };
+
+  const bldux = (e) => {
+    setMatchDay(e.target.checked);
   };
 
   return (
@@ -107,6 +115,16 @@ export const ProDescritptionAndProbability = ({
             </Form.Item>
           </Input.Group>
         </Form.Item>
+        {type === "ordinar" ? (
+          <Form.Item
+            name={"matchDay"}
+            style={{ width: "12%", marginLeft: "3%" }}
+          >
+            <Checkbox onChange={bldux}>Match of Day</Checkbox>
+          </Form.Item>
+        ) : (
+          ""
+        )}
         <Form.Item {...tailLayout}>
           <Button type="danger" htmlType="submit">
             Add Game

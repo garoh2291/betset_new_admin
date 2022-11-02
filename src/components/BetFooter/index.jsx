@@ -6,6 +6,7 @@ import "./styles.css";
 
 export const BetFooter = ({ lang }) => {
   const { betGames } = useContext(GameContext);
+  console.log(betGames);
   let earlyDate = betGames[0].date;
   for (let i = 0; i < betGames.length; i++) {
     let checkingDate = new Date(betGames[i].date).getTime();
@@ -16,6 +17,8 @@ export const BetFooter = ({ lang }) => {
 
   const isTime = moment.utc(earlyDate).format("HH:mm");
   const isDate = moment.utc(earlyDate).format("DD MM YYYY");
+
+  console.log(isDate, isTime);
 
   const totalCf = betGames.reduce((sum, game) => {
     return (sum *= game.coeff);
@@ -42,7 +45,11 @@ export const BetFooter = ({ lang }) => {
   const finalTime = timeLogic(isTime, isDate, lang);
 
   const month = `${finalTime[3]}${finalTime[4]}`;
+  console.log(finalTime);
+  console.log(month, lang);
+
   const date = `${finalTime[0]}${finalTime[1]} ${MONTHS[month][lang]} ${finalTime[6]}${finalTime[7]}${finalTime[8]}${finalTime[9]}`;
+  console.log(date);
   const time = `${finalTime[12]}${finalTime[13]}:${finalTime[15]}${finalTime[16]}`;
 
   return (

@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { GameContext } from "../../context";
 import { generateQuery } from "../../helpers";
 import { getAllGamesThunk } from "../../redux/gameSlice";
 import { getUserDetailsThunk } from "../../redux/userSlice/user-async";
 import { EditModal } from "../EditModal";
+import { PreviewComponent } from "../PreviewComponent";
 import { OrdinarBoardTable } from "./OrdinarBoardTable";
 import { OrdinarFilter } from "./OrdinarFilter";
 
@@ -12,6 +15,7 @@ import "./styles.css";
 
 export const OrdinarBoard = () => {
   const [searchSortQuery, setSearchSortQuery] = useState([]);
+  const { setBetGames } = useContext(GameContext);
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,6 +28,7 @@ export const OrdinarBoard = () => {
   //Edit Existing ordinars
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editModalGame, setEditModalGame] = useState(null);
+  const [isPreview, setIsPreview] = useState(false);
 
   const editModalOpenHandler = useCallback(
     (game) => {
@@ -36,6 +41,20 @@ export const OrdinarBoard = () => {
       }
     },
     [isEditOpen]
+  );
+
+  const previewModalOpenHandler = useCallback(
+    (game) => {
+      if (isPreview) {
+        setIsPreview(false);
+        setBetGames([]);
+      } else {
+        setIsPreview(true);
+
+        setBetGames([game]);
+      }
+    },
+    [isPreview, setBetGames]
   );
   //////
 
@@ -75,11 +94,22 @@ export const OrdinarBoard = () => {
   return (
     <div className="ordinar_board_main">
       <OrdinarFilter getTasks={getTasksClosure} />
-      <OrdinarBoardTable editModalOpenHandler={editModalOpenHandler} />
+      <OrdinarBoardTable
+        editModalOpenHandler={editModalOpenHandler}
+        previewModalOpenHandler={previewModalOpenHandler}
+      />
       {isEditOpen && (
         <EditModal
           onClose={() => setIsEditOpen(false)}
           editGame={editModalGame}
+        />
+      )}
+      {isPreview && (
+        <PreviewComponent
+          onClose={() => {
+            setIsPreview(false);
+            setBetGames([]);
+          }}
         />
       )}
     </div>

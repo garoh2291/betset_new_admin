@@ -11,7 +11,7 @@ export const ProBuilder = () => {
   const [leagues, setLeagues] = useState([]);
   const [matchs, setMatchs] = useState(null);
   const location = useLocation();
-  const type = location.pathname === "/" ? "ordinar" : "express";
+  const type = location.pathname === "/new-express" ? "express" : "ordinar";
 
   useEffect(() => {
     fetch(

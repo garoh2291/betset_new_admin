@@ -15,7 +15,10 @@ import { Skeleton } from "antd";
 import "./styles.css";
 import { OrdinarGameRow } from "../OrdinarGameRow";
 
-export const OrdinarBoardTable = ({ editModalOpenHandler }) => {
+export const OrdinarBoardTable = ({
+  editModalOpenHandler,
+  previewModalOpenHandler,
+}) => {
   const { games } = useSelector((state) => state.games);
   const dispatch = useDispatch();
 
@@ -102,6 +105,7 @@ export const OrdinarBoardTable = ({ editModalOpenHandler }) => {
                 game={game}
                 deleteGameHandler={deleteGameHandler}
                 editModalOpenHandler={editModalOpenHandler}
+                previewModalOpenHandler={previewModalOpenHandler}
               />
             ))}
           </TableBody>

@@ -3,36 +3,7 @@ import { message } from "antd";
 import { removeUser, setUser } from ".";
 import { BACKEND_URL } from "../../data";
 
-// import { openNotificationWithIcon } from "../../helpers/notification";
 import { getToken } from "../../helpers/token";
-
-// export const registrateNewUserThunk = createAsyncThunk(
-//   "user/registrateNewUserThunk",
-//   function ({ formData, cb }, { dispatch, rejectWithValue }) {
-//     fetch(`${BACKEND_URL}/user`, {
-//       method: "POST",
-//       headers: {
-//         "Content-type": "application/json",
-//       },
-//       body: JSON.stringify(formData),
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         console.log(data);
-//         if (!data.error) {
-//           cb();
-//         } else {
-//           message.error(data.error.message);
-
-//           throw new Error(data.error.message);
-//         }
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//         rejectWithValue(err);
-//       });
-//   }
-// );
 
 export const loginUserThunk = createAsyncThunk(
   "user/loginUserThunk",

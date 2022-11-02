@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getGamesRequest } from "../../api";
+import { getGamesRequest, getGamesRequestExpress } from "../../api";
 import { BACKEND_URL } from "../../data";
 
 export const getAllGamesThunk = createAsyncThunk(
@@ -11,6 +11,22 @@ export const getAllGamesThunk = createAsyncThunk(
           throw data.error;
         }
         dispatch(setGames({ data }));
+      })
+      .catch((error) => {
+        return rejectWithValue(error.message);
+      });
+  }
+);
+
+export const getAllExpressThunk = createAsyncThunk(
+  "games/getAllGamesThunk",
+  function (queryExpress, { dispatch, rejectWithValue }) {
+    getGamesRequestExpress(queryExpress)
+      .then((data) => {
+        if (data.error) {
+          throw data.error;
+        }
+        dispatch(setExpress({ data }));
       })
       .catch((error) => {
         return rejectWithValue(error.message);
@@ -111,7 +127,7 @@ const gameSlice = createSlice({
   name: "games",
   initialState: {
     games: null,
-    express: [],
+    express: null,
   },
   reducers: {
     setGames(state, action) {
@@ -152,6 +168,13 @@ const gameSlice = createSlice({
         games,
       };
     },
+    setExpress(state, action) {
+      const ExpressesFromBackend = action.payload.data;
+      return {
+        ...state,
+        express: ExpressesFromBackend,
+      };
+    },
     addExpress(state, action) {
       const newExpress = action.payload.data;
       const express = [...state.games, newExpress];
@@ -164,7 +187,7 @@ const gameSlice = createSlice({
   },
 });
 
-const { setGames, addGame, deleteGame, editGame, addExpress } =
+const { setGames, addGame, deleteGame, editGame, setExpress, addExpress } =
   gameSlice.actions;
 
 export default gameSlice.reducer;

@@ -13,32 +13,53 @@
   justify-content: space-evenly;
 }
 
-.delete_button {
+.delete_button_prev {
   background-color: transparent;
   border: none;
-  width: 30px;
+  width: 20px;
   cursor: pointer;
-  height: 30px;
+  height: 20px;
 }
 
-.change_button {
+.view_button_rev {
   background-color: transparent;
   border: none;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  cursor: pointer;
+  height: 20px;
+}
+
+.change_button_prev {
+  background-color: transparent;
+  border: none;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 }
 
-.change_button:hover {
+.change_button_prev:hover {
   color: green;
 }
 
-.delete_button:hover {
+.delete_button_prev:hover {
   color: red;
 }
 
-.weather_span {
+.view_button_rev:hover {
+  color: blue;
+}
+
+.description_span {
   display: flex !important;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.match_of_day_button {
+  background-color: transparent;
+  border: none;
+  width: 20px;
+  cursor: pointer;
+  height: 20px;
+  color: green;
 }

@@ -52,6 +52,7 @@ export const NewExpress = () => {
           type="danger"
           onClick={editExpressOpenHandler}
           disabled={!isDisable}
+          style={{ marginLeft: "70%" }}
         >
           View Cheque
         </Button>

@@ -22,6 +22,7 @@ export const SportItem = memo(({ match, type }) => {
   const [matchDetailsAm, setMatchDetailsAm] = useState();
   const [matchDetailsEn, setMatchDetailsEn] = useState();
   const [matchDetailsRu, setMatchDetailsRu] = useState();
+
   const dispatch = useDispatch();
   const cbSuccess = () => {
     message.success("Game successfully added");
@@ -34,13 +35,13 @@ export const SportItem = memo(({ match, type }) => {
   ////Date
   const s = new Date(`${match.TempEventDate}`);
   const dt = moment(s).format("YYYY-MM-DD HH:mm:ss");
-  const dt2 = new Date(`${dt} UTC`);
+  const dt1 = new Date(`${dt}`);
 
-  const finalDate = moment(dt2).utc().toISOString();
-
-  // const finalDate = "2022-10-01";
+  const finalDate = moment(dt1).utc(8).toISOString();
 
   //////
+
+  ////
 
   useEffect(() => {
     fetch(
@@ -72,6 +73,7 @@ export const SportItem = memo(({ match, type }) => {
       descriptionRu,
       probPrc,
       coef,
+      matchDay,
     } = additional;
 
     const newGame = {
@@ -104,6 +106,8 @@ export const SportItem = memo(({ match, type }) => {
         en: descriptionEn,
         ru: descriptionRu,
       },
+      matchDay: matchDay ? "yes" : "no",
+
       date: finalDate,
     };
 

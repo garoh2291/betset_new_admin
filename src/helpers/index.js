@@ -13,9 +13,8 @@ import AcUnitIcon from "@mui/icons-material/AcUnit";
 import WbCloudyIcon from "@mui/icons-material/WbCloudy";
 
 const today = new Date();
-const today1 = new Date(`${today} UTC`);
-const finalDate = moment(today1).utc().toISOString();
-// const finalDate = "2022-10-01";
+const today1 = new Date(`${today}`);
+const finalDate = moment(today1).utc(8).toISOString();
 
 export function sportType(sport) {
   switch (sport) {
@@ -58,6 +57,20 @@ export const generateQuery = (_searchSortQuery) => {
   }
 };
 
+export const generateQueryExpress = (_searchSortQuery) => {
+  let query = "";
+  _searchSortQuery.forEach((item) => {
+    if (item.queryValue !== "") {
+      return (query += `${item.queryRoute}=${item.queryValue}&`);
+    }
+  });
+  if (query === "") {
+    return `complete_gte=${finalDate}`;
+  } else {
+    return query;
+  }
+};
+
 export function weatherType(weather) {
   switch (weather) {
     case "sunny":
@@ -79,7 +92,6 @@ export function checkProbability(cf, probability) {
   const risk =
     ((parseFloat(cf) * parseFloat(probability)) / 100 - 1) /
     (parseFloat(cf) - 1);
-  console.log(risk);
   if (risk >= 0.9) {
     return "best";
   } else if (risk >= 0.7 && risk < 0.9) {

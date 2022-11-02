@@ -1,6 +1,8 @@
 import React from "react";
 import { IconButton, TableCell, TableRow, Tooltip } from "@mui/material";
 import { DeleteTwoTone, EditTwoTone } from "@mui/icons-material";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import HelpIcon from "@mui/icons-material/Help";
 import * as moment from "moment";
 import { sportType } from "../../../helpers";
@@ -10,12 +12,16 @@ export const OrdinarGameRow = ({
   game,
   deleteGameHandler,
   editModalOpenHandler,
+  previewModalOpenHandler,
 }) => {
-  const { _id } = game;
+  const { _id, matchDay } = game;
 
   return (
     <TableRow
-      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+      sx={{
+        "&:last-child td, &:last-child th": { border: 0 },
+        backgroundColor: matchDay === "yes" ? "#96ffbf" : "",
+      }}
       className="table_row"
     >
       <TableCell component="th" scope="row" align="center">
@@ -41,7 +47,7 @@ export const OrdinarGameRow = ({
       <TableCell align="center">{game.risk}</TableCell>
       <TableCell align="center">{game.coeff.toFixed(2)}</TableCell>
       <TableCell align="center">
-        <div className="weather_span">
+        <div className="description_span">
           <Tooltip title={game.description.en} placement="top-start">
             <IconButton>
               <HelpIcon />
@@ -50,13 +56,19 @@ export const OrdinarGameRow = ({
         </div>
       </TableCell>
       <TableCell align="center" className="action_cell">
-        <button className="delete_button">
+        <button className="view_button_rev">
+          <RemoveRedEyeIcon
+            style={{ height: 20, width: 20 }}
+            onClick={() => previewModalOpenHandler(game)}
+          />
+        </button>
+        <button className="delete_button_prev">
           <DeleteTwoTone
             style={{ height: 20, width: 20 }}
             onClick={() => deleteGameHandler(_id)}
           />
         </button>
-        <button className="change_button">
+        <button className="change_button_prev">
           <EditTwoTone
             style={{ height: 20, width: 20 }}
             onClick={() => editModalOpenHandler(game)}

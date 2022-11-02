@@ -5,7 +5,12 @@ export const GameContextProvider = ({ children }) => {
   const [betGames, setBetGames] = useState([]);
 
   return (
-    <GameContext.Provider value={{ betGames, setBetGames }}>
+    <GameContext.Provider
+      value={{
+        betGames,
+        setBetGames,
+      }}
+    >
       {children}
     </GameContext.Provider>
   );

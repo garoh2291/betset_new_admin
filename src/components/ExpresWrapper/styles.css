@@ -1,0 +1,22 @@
+.express_body_wrapper {
+  width: 100%;
+  min-height: 300px;
+  border: 1px solid;
+  padding: 5px;
+}
+
+.no_express_wrapper {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cheque_wrapper span {
+  font-weight: 600;
+}
+
+/* .status_change_button > span {
+  color: black !important;
+} */

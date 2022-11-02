@@ -1,0 +1,54 @@
+.delete_button {
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  height: 30px;
+
+  display: none;
+  position: absolute;
+  right: 0px;
+  top: 10px;
+}
+
+.table_row:hover .delete_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.table_row {
+  /* min-height: 50px !important; */
+  max-width: 750px;
+  position: relative;
+}
+
+.delete_cell {
+  position: relative;
+}
+
+.change_button {
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: none;
+  position: absolute;
+  right: 30px;
+  top: 10px;
+}
+
+.change_button:hover {
+  color: green;
+}
+
+.delete_button:hover {
+  color: red;
+}
+
+.table_row:hover .change_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

@@ -56,6 +56,27 @@ export const SetGameThunk = createAsyncThunk(
   }
 );
 
+export const SetHistoryThunk = createAsyncThunk(
+  "games/SetHistoryThunk",
+  function ({ data, cbSuccess, cbError }, { dispatch, rejectWithValue }) {
+    fetch(`${BACKEND_URL}/history`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Server Error!");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        cbSuccess();
+      })
+      .catch((err) => cbError);
+  }
+);
+
 export const SetExpressThunk = createAsyncThunk(
   "games/setGameThunk",
   function ({ newExpress, cbSuccess, cbError }, { dispatch, rejectWithValue }) {
@@ -100,7 +121,7 @@ export const DeleteGameThunk = createAsyncThunk(
 );
 
 export const editGameThunk = createAsyncThunk(
-  "tasks/editGameThunk",
+  "games/editGameThunk",
   function ({ editFormData, onClose, _id }, { dispatch, rejectWithValue }) {
     fetch(`${BACKEND_URL}/game/${_id}`, {
       method: "PUT",
@@ -120,6 +141,34 @@ export const editGameThunk = createAsyncThunk(
         return rejectWithValue(error.message);
       });
     onClose();
+  }
+);
+
+export const changeExpressStatusThunk = createAsyncThunk(
+  "games/changeExpressStatusThunk",
+  function (
+    { changedData, _id, cbSuccess, cbError },
+    { dispatch, rejectWithValue }
+  ) {
+    fetch(`${BACKEND_URL}/express/${_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(changedData),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Server Error!");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        cbSuccess();
+        dispatch(ChangeExpressStatus({ data }));
+        dispatch(SetHistoryThunk({ data, cbSuccess, cbError }));
+      })
+      .catch((err) => cbError);
   }
 );
 
@@ -184,10 +233,31 @@ const gameSlice = createSlice({
         express,
       };
     },
+    ChangeExpressStatus(state, action) {
+      const editedExpres = action.payload.data;
+      const express = state.express.map((game) => {
+        if (game._id === editedExpres._id) {
+          return editedExpres;
+        }
+        return game;
+      });
+
+      return {
+        ...state,
+        express,
+      };
+    },
   },
 });
 
-const { setGames, addGame, deleteGame, editGame, setExpress, addExpress } =
-  gameSlice.actions;
+const {
+  setGames,
+  addGame,
+  deleteGame,
+  editGame,
+  setExpress,
+  addExpress,
+  ChangeExpressStatus,
+} = gameSlice.actions;
 
 export default gameSlice.reducer;

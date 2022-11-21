@@ -7,6 +7,7 @@ import "./styles.css";
 export const ProBuilder = () => {
   const [sport, setSport] = useState([]);
   // const [selSport,setSelSport] = useState(null)
+
   const [country, setcountry] = useState([]);
   const [leagues, setLeagues] = useState([]);
   const [matchs, setMatchs] = useState(null);
@@ -16,6 +17,7 @@ export const ProBuilder = () => {
   useEffect(() => {
     fetch(
       // " https://sportiframe.totogaming.am/Live/Sports?langId=3&partnerId=555&countryCode="
+      // "https://sportiframe.totogaming.am/Prematch/GetSportsWithCount?timeFilter=0&langId=3&partnerId=555&countryCode=",
       "https://sportiframe.totogaming.am/Prematch/GetSportsWithCount?timeFilter=2&langId=3&partnerId=555&countryCode="
     )
       .then((res) => res.json())
@@ -60,7 +62,7 @@ export const ProBuilder = () => {
 
   const changeHandleLeagues = (e) => {
     fetch(
-      `https://sportiframe.totogaming.am/Prematch/GetEventsList?champId=${e}&timeFilter=2&langId=3&partnerId=555&countryCode=`
+      `https://sportiframe.totogaming.am/Prematch/GetEventsList?champId=${e}&timeFilter=0&langId=3&partnerId=555&countryCode=`
     )
       .then((res) => res.json())
       .then((data) => setMatchs(data));

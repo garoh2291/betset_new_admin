@@ -82,7 +82,7 @@ export const SportTypeFilter = ({ getTasks }) => {
                   <Option value="regby">Regby</Option>
                   <Option value="tennis">Tennis</Option>
                   <Option value="tableTennis">Table Tennis</Option>
-                  <Option value="hockey">Hockey</Option>
+                  <Option value="ice hockey">Ice hockey</Option>
                 </Select>
               </Form.Item>
             ) : (
@@ -97,6 +97,7 @@ export const SportTypeFilter = ({ getTasks }) => {
                   <Option value="pending">Pending</Option>
                   <Option value="win">Win</Option>
                   <Option value="loose">Loose</Option>
+                  <Option value="returned">Returned</Option>
                 </Select>
               </Form.Item>
             )}

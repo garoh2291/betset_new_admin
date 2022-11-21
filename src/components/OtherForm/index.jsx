@@ -37,7 +37,7 @@ export const OtherFrom = ({ changeSport, onMatchDayChange, type }) => {
             <Option value="regby">Regby</Option>
             <Option value="tennis">Tennis</Option>
             <Option value="tableTennis">Table Tennis</Option>
-            <Option value="hockey">Hockey</Option>
+            <Option value="ice hockey">Ice Hockey</Option>
           </Select>
         </Form.Item>
 

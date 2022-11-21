@@ -8,9 +8,10 @@
 }
 
 .action_cell {
-  display: flex;
+  display: flex !important;
   align-items: center;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
+  height: 100%;
 }
 
 .delete_button_prev {
@@ -19,6 +20,7 @@
   width: 20px;
   cursor: pointer;
   height: 20px;
+  margin-left: 20px;
 }
 
 .view_button_rev {
@@ -34,6 +36,8 @@
   border: none;
   width: 20px;
   height: 20px;
+  margin-left: 20px;
+
   cursor: pointer;
 }
 
@@ -62,4 +66,21 @@
   cursor: pointer;
   height: 20px;
   color: green;
+}
+
+.ordinar_game_league_text {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  margin: 0 auto;
+}
+
+.ordinar_game_date_text {
+  width: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 auto;
 }

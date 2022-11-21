@@ -25,14 +25,14 @@ export const ExpressBoard = () => {
   );
 
   const previewModalOpenHandler = useCallback(
-    (game) => {
+    (games) => {
       if (isPreview) {
         setIsPreview(false);
         setBetGames([]);
       } else {
         setIsPreview(true);
 
-        setBetGames([game]);
+        setBetGames(games);
       }
     },
     [isPreview, setBetGames]

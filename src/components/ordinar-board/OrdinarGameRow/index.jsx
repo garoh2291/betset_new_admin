@@ -27,9 +27,23 @@ export const OrdinarGameRow = ({
       <TableCell component="th" scope="row" align="center">
         {sportType(game.sport)}
       </TableCell>
-      <TableCell align="center">{game.league.en}</TableCell>
-      <TableCell align="center">
-        {moment(game.date).format("DD-MM-YYYY")}
+      <TableCell
+        align="center"
+        sx={{
+          width: 100,
+        }}
+      >
+        <p className="ordinar_game_league_text" title={`${game.league.en}`}>
+          {game.league.en}
+        </p>
+      </TableCell>
+      <TableCell align="center" sx={{ width: 50 }}>
+        <p
+          className="ordinar_game_date_text"
+          title={`${moment(game.date).format("DD-MM-YYYY")}`}
+        >
+          {moment(game.date).format("DD-MM-YYYY")}
+        </p>
       </TableCell>
 
       <TableCell align="center">
@@ -55,25 +69,27 @@ export const OrdinarGameRow = ({
           </Tooltip>
         </div>
       </TableCell>
-      <TableCell align="center" className="action_cell">
-        <button className="view_button_rev">
-          <RemoveRedEyeIcon
-            style={{ height: 20, width: 20 }}
-            onClick={() => previewModalOpenHandler(game)}
-          />
-        </button>
-        <button className="delete_button_prev">
-          <DeleteTwoTone
-            style={{ height: 20, width: 20 }}
-            onClick={() => deleteGameHandler(_id)}
-          />
-        </button>
-        <button className="change_button_prev">
-          <EditTwoTone
-            style={{ height: 20, width: 20 }}
-            onClick={() => editModalOpenHandler(game)}
-          />
-        </button>
+      <TableCell align="center">
+        <div className="action_cell">
+          <button className="view_button_rev">
+            <RemoveRedEyeIcon
+              style={{ height: 20, width: 20 }}
+              onClick={() => previewModalOpenHandler(game)}
+            />
+          </button>
+          <button className="delete_button_prev">
+            <DeleteTwoTone
+              style={{ height: 20, width: 20 }}
+              onClick={() => deleteGameHandler(_id)}
+            />
+          </button>
+          <button className="change_button_prev">
+            <EditTwoTone
+              style={{ height: 20, width: 20 }}
+              onClick={() => editModalOpenHandler(game)}
+            />
+          </button>
+        </div>
       </TableCell>
     </TableRow>
   );

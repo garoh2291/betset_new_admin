@@ -30,7 +30,7 @@ export function sportType(sport) {
           style={{ marginRight: "7px" }}
         />
       );
-    case "hockey":
+    case "ice hockey":
       return <img src={hockey} alt="img" width={"20px"} height="20px" />;
     case "regby":
       return <img src={afootbal} alt="img" width={"30px"} height="30px" />;

@@ -1,1 +1,24 @@
+.express_game_item_wrapper {
+  height: 50px;
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: 1px 1px 1px 1px #c7c7c7;
+}
 
+.express_game_item_wrapper > span {
+  width: 130px;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+
+.sport_type_img {
+  width: 30px;
+  height: 30px;
+}

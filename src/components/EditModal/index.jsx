@@ -1,4 +1,4 @@
-import { message, Modal } from "antd";
+import { message, Modal, Radio } from "antd";
 import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { editGameThunk } from "../../redux/gameSlice";
@@ -16,6 +16,9 @@ export const EditModal = ({ onClose, editGame }) => {
   const [inputsData, setInputsData] = useState({
     coeff: {
       value: editGame.coeff,
+    },
+    date: {
+      value: editGame.date,
     },
 
     leagueAm: {
@@ -71,11 +74,17 @@ export const EditModal = ({ onClose, editGame }) => {
       value: editGame.sport,
     },
     probability: "",
-
-    date: {
-      value: editGame.date,
+    matchDay: {
+      value: editGame.matchDay,
     },
   });
+
+  const [matchDayGame, setMatchDayGame] = useState(editGame.matchDay);
+
+  const changeMatchDayGame = (e) => {
+    const type = e.target.value;
+    setMatchDayGame(type);
+  };
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -162,7 +171,12 @@ export const EditModal = ({ onClose, editGame }) => {
         en: type === "ordinar" ? descriptionEn : undefined,
         ru: type === "ordinar" ? descriptionRu : undefined,
       },
+      date: editGame.date,
     };
+
+    if (type === "ordinar") {
+      editFormData.matchDay = matchDayGame;
+    }
 
     if (editFormData.risk === "wrong") {
       message.error("You can't add this game");
@@ -371,6 +385,20 @@ export const EditModal = ({ onClose, editGame }) => {
               />
             </FormGroup>
           </Col>
+          {type === "ordinar" ? (
+            <Col md={3}>
+              <Radio.Group
+                style={{ marginLeft: 10, marginTop: 30 }}
+                onChange={changeMatchDayGame}
+                defaultValue={matchDayGame}
+              >
+                <Radio.Button value="yes">Yes</Radio.Button>
+                <Radio.Button value="no">No</Radio.Button>
+              </Radio.Group>
+            </Col>
+          ) : (
+            ""
+          )}
         </Row>
         {type === "ordinar" ? (
           <Row>

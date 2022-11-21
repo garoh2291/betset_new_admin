@@ -56,7 +56,10 @@ export const OrdinarBoardTable = ({
               <TableCell align="center" sx={{ fontWeight: "600" }}>
                 Sport
               </TableCell>
-              <TableCell align="center" sx={{ fontWeight: "600" }}>
+              <TableCell
+                align="center"
+                sx={{ fontWeight: "600", maxWidth: 100 }}
+              >
                 League
               </TableCell>
               <TableCell align="center" sx={{ fontWeight: "600" }}>
@@ -86,14 +89,11 @@ export const OrdinarBoardTable = ({
               >
                 Coefficient
               </TableCell>
-              <TableCell
-                sx={{ fontWeight: "600", minWidth: 100 }}
-                align="center"
-              >
+              <TableCell sx={{ fontWeight: "600" }} align="center">
                 Description
               </TableCell>
               <TableCell
-                sx={{ fontWeight: "600", minWidth: 100 }}
+                sx={{ fontWeight: "600", minWidth: 200 }}
                 align="center"
               ></TableCell>
             </TableRow>
